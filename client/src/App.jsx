@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import "./App.css";
 
-const API_URL = "http://localhost:5000/api/tasks";
+const API_URL = "https://taskmate-api-fipb.onrender.com/api/tasks";
 
 const starterTasks = [
   {
@@ -78,7 +78,7 @@ async function handleLogin(event) {
         : { email: email.trim(), password };
 
     const response = await axios.post(
-      `http://localhost:5000/api/auth${endpoint}`,
+      `https://taskmate-api-fipb.onrender.com/api/auth${endpoint}`,
       payload
     );
 
@@ -102,20 +102,20 @@ async function handleLogin(event) {
 function handleLogout() {
   localStorage.removeItem("taskmate-token");
   localStorage.removeItem("taskmate-user");
+  localStorage.removeItem("taskmate-demo-login");
+
   setCurrentUser(null);
   setIsLoggedIn(false);
   setTasks([]);
   setPassword("");
+  setEmail("");
+  setName("");
+  setAuthMode("login");
   setLoginError("");
   setNotice("");
 }
 
-function handleLogout() {
-  localStorage.removeItem("taskmate-demo-login");
-  setIsLoggedIn(false);
-  setPassword("");
-  setLoginError("");
-}
+
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   const [showForm, setShowForm] = useState(false);
